@@ -337,7 +337,7 @@ Contributions, issues và feature requests đều được chào đón!
 **Dương Bill**
 
 - GitHub: [@duongbill](https://github.com/duongbill)
-- Email: your.email@example.com
+- Email: billduongg@gmail.com
 
 ## 📝 License
 
