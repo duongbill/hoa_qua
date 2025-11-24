@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+tf210/
+
+# Streamlit artifacts
+.streamlit/
+
+# IDE / editor folders
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Logs & temp
+*.log
+*.tmp
+
+# Model artifacts / large data
+*.h5
+*.keras
+data/
+Download_image/
+trained_model.h5
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
