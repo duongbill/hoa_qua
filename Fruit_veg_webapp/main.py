@@ -94,7 +94,7 @@ if selected_lang != st.session_state.language:
 lang = st.session_state.language
 app_mode = st.sidebar.selectbox(
     TRANSLATIONS[lang]['select_page'],
-    [TRANSLATIONS[lang]['home'], TRANSLATIONS[lang]['about'], 
+    [TRANSLATIONS[lang]['home'], 
      TRANSLATIONS[lang]['visualization'], TRANSLATIONS[lang]['prediction']]
 )
 
@@ -149,12 +149,16 @@ if app_mode == TRANSLATIONS[lang]['home']:
     """)
     
     # Optional: Display a placeholder image if home_img.jpg exists
-    if os.path.exists("home_img.jpg"):
-        st.image("home_img.jpg", use_container_width=True)
+    image_path = Path(__file__).parent / "home_img.jpg"
+    if image_path.exists():
+        st.image(str(image_path), use_container_width=True)
     else:
         # Create a simple banner with emojis
         st.info("🍎 🍌 🥕 🥦 🍅 🥒 🍊 🍇 🥔 🌽")
-        st.success("👈 **Get started by selecting a page from the sidebar!**")
+        if lang == 'vi':
+            st.success("👈 **Bắt đầu bằng cách chọn một trang từ thanh bên!**")
+        else:
+            st.success("👈 **Get started by selecting a page from the sidebar!**")
 
 #About Project
 elif app_mode == TRANSLATIONS[lang]['about']:
