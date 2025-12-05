@@ -690,7 +690,7 @@ elif app_mode == TRANSLATIONS[lang]['prediction']:
                         # Get top 3 predictions
                         top_3_indices = np.argsort(predictions)[-3:][::-1]
                         
-                        top3_text = "🏆 Top 3 Dự đoán" if lang == 'vi' else "🏆 Top 3 Predictions"
+                        top3_text = "🏆 Top 5 Dự đoán" if lang == 'vi' else "🏆 Top 5 Predictions"
                         st.subheader(top3_text)
                         for i, idx in enumerate(top_3_indices, 1):
                             prob = predictions[idx] * 100
@@ -730,9 +730,10 @@ elif app_mode == TRANSLATIONS[lang]['prediction']:
                         class_label: labels,
                         prob_label: predictions * 100
                     })
-                    df_pred = df_pred.sort_values(prob_label, ascending=False).head(10)
+                    # Lấy top 30 classes có xác suất cao nhất
+                    df_pred = df_pred.sort_values(prob_label, ascending=False).head(30)
                     
-                    chart_title = 'Top 10 Xác suất các Loại' if lang == 'vi' else 'Top 10 Class Probabilities'
+                    chart_title = 'Top 30 Xác suất các Loại' if lang == 'vi' else 'Top 30 Class Probabilities'
                     fruit_veg = 'Hoa quả/Rau củ' if lang == 'vi' else 'Fruit/Vegetable'
                     
                     fig = px.bar(df_pred, 
@@ -744,7 +745,8 @@ elif app_mode == TRANSLATIONS[lang]['prediction']:
                                 color=prob_label,
                                 color_continuous_scale='viridis')
                     
-                    fig.update_layout(height=500, showlegend=False)
+                    # Tăng height để hiển thị đủ 30 bars
+                    fig.update_layout(height=1000, showlegend=False)
                     st.plotly_chart(fig, use_container_width=True)
                     
                 except Exception as e:
@@ -764,9 +766,9 @@ elif app_mode == TRANSLATIONS[lang]['prediction']:
             - Ảnh có độ phân giải cao cho kết quả tốt hơn
             
             ### 🎯 36 Loại được hỗ trợ:
-            **Hoa quả:** Táo, Chuối, Nho, Kiwi, Xoài, Cam, Lê, Dứa, Lựu, Dưa hấu
+            **Hoa quả:** Nho, Kiwi, Xoài, Cam, Lê, Dứa,Táo, Chuối, Lựu, Dưa hấu
             
-            **Rau củ:** Củ dền, Ớt chuông, Bắp cải, Ớt capsicum, Cà rốt, Súp lơ, Ớt, Bắp ngô, Dưa chuột, Cà tím, Tỏi, Gừng, Ớt Jalapeño, Chanh, Rau diếp, Hành tây, Ớt paprika, Đậu Hà Lan, Khoai tây, Củ cải, Đậu nành, Rau bina, Bắp ngô ngọt, Khoai lang, Cà chua, Củ cải trắng
+            **Rau củ:** Ớt capsicum, Cà rốt, Súp lơ, Ớt, Bắp ngô, Dưa chuột, Cà tím, Tỏi, Gừng, Ớt Jalapeño, Chanh,Củ dền, Ớt chuông, Bắp cải, Rau xà lách, Hành tây, Ớt paprika, Đậu Hà Lan, Khoai tây, Củ cải, Đậu nành, Rau bina, Bắp ngô ngọt, Khoai lang, Cà chua, Củ cải trắng
             """)
         else:
             st.info("👆 Please upload an image to get started!")
